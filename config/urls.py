@@ -23,7 +23,7 @@ from rest_framework import permissions
 # drf-yasg
 schema_view = get_schema_view(
     openapi.Info(
-        title="Contact List API",
+        title="Contacts API",
         default_version='v1',
         description="An API for contacts",
         terms_of_service="",
