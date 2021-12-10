@@ -16,8 +16,30 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from rest_framework import permissions
+
+# drf-yasg
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Contact List API",
+        default_version='v1',
+        description="An API for contacts",
+        terms_of_service="",
+        contact=openapi.Contact(email="contact@contacts.remote"),
+        license=openapi.License(name="Test License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/auth/', include('authentication.urls')),
-    path('api/v1/contacts/', include('contacts.urls')),
+    path('api/v1/contacts', include('contacts.urls')),
+
+    # drf-yasg
+    path('', schema_view.with_ui('swagger', cache_timeout=None), name='schema-swagger-ui'),
+    path('redoc', schema_view.with_ui('redoc', cache_timeout=None), name='schema-redoc'),
 ]

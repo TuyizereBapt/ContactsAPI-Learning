@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     # 3rd party
     'rest_framework',
+    'drf_yasg',  # drf-yasg - Yet another Swagger generator. Used for API documentation
 
     # Apps
     'authentication',
@@ -50,6 +51,16 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('authentication.backends.JWTAuthentication',)
+}
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Auth Token e.g [Bearer (JWT)': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    },
 }
 
 MIDDLEWARE = [
